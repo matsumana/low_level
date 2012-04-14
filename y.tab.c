@@ -37,39 +37,43 @@ typedef union {
 #define CR 262
 #define YYERRCODE 256
 short yylhs[] = {                                        -1,
-    0,    0,    4,    1,    1,    1,    2,    2,    2,    3,
+    0,    0,    4,    4,    1,    1,    1,    2,    2,    2,
+    3,
 };
 short yylen[] = {                                         2,
-    1,    2,    2,    1,    3,    3,    1,    3,    3,    1,
+    1,    2,    2,    2,    1,    3,    3,    1,    3,    3,
+    1,
 };
 short yydefred[] = {                                      0,
-   10,    0,    0,    0,    7,    1,    2,    0,    0,    3,
-    0,    0,    0,    0,    8,    9,
+    0,   11,    0,    0,    0,    8,    1,    4,    2,    0,
+    0,    3,    0,    0,    0,    0,    9,   10,
 };
-short yydgoto[] = {                                       2,
-    3,    4,    5,    6,
+short yydgoto[] = {                                       3,
+    4,    5,    6,    7,
 };
-short yysindex[] = {                                   -252,
-    0, -252, -258, -246,    0,    0,    0, -252, -252,    0,
- -252, -252, -246, -246,    0,    0,
+short yysindex[] = {                                   -242,
+ -257,    0, -242, -258, -244,    0,    0,    0,    0, -245,
+ -245,    0, -245, -245, -244, -244,    0,    0,
 };
 short yyrindex[] = {                                      0,
-    0,    0,    0, -256,    0,    0,    0,    0,    0,    0,
-    0,    0, -251, -249,    0,    0,
+    0,    0,    0,    0, -256,    0,    0,    0,    0,    0,
+    0,    0,    0,    0, -251, -249,    0,    0,
 };
 short yygindex[] = {                                      0,
-    0,    8,    7,   10,
+    0,    8,    7,   19,
 };
-#define YYTABLESIZE 19
-short yytable[] = {                                       8,
-    9,    4,    4,   10,    1,    4,    5,    5,    6,    6,
-    5,    7,    6,   11,   12,   13,   14,   15,   16,
+#define YYTABLESIZE 22
+short yytable[] = {                                      10,
+   11,    5,    5,   12,    8,    5,    6,    6,    7,    7,
+    6,    2,    7,    1,    2,   13,   14,   15,   16,   17,
+   18,    9,
 };
 short yycheck[] = {                                     258,
-  259,  258,  259,  262,  257,  262,  258,  259,  258,  259,
-  262,    2,  262,  260,  261,    8,    9,   11,   12,
+  259,  258,  259,  262,  262,  262,  258,  259,  258,  259,
+  262,  257,  262,  256,  257,  260,  261,   10,   11,   13,
+   14,    3,
 };
-#define YYFINAL 2
+#define YYFINAL 3
 #ifndef YYDEBUG
 #define YYDEBUG 0
 #endif
@@ -90,6 +94,7 @@ char *yyrule[] = {
 "line_list : line",
 "line_list : line_list line",
 "line : expression CR",
+"line : error CR",
 "expression : term",
 "expression : expression ADD term",
 "expression : expression SUB term",
@@ -132,7 +137,7 @@ static short   *yyss;
 static short   *yysslim;
 static YYSTYPE *yyvs;
 static int      yystacksize;
-#line 49 "mycalc.y"
+#line 55 "mycalc.y"
 int
 yyerror(char const *str)
 {
@@ -152,7 +157,7 @@ int main(void)
         exit(1);
     }
 }
-#line 156 "y.tab.c"
+#line 161 "y.tab.c"
 /* allocate initial stack or double stack size, up to YYMAXDEPTH */
 static int yygrowstack(void)
 {
@@ -339,31 +344,38 @@ case 3:
         printf(">>%lf\n", yyvsp[-1].double_value);
     }
 break;
-case 5:
-#line 26 "mycalc.y"
+case 4:
+#line 24 "mycalc.y"
+{
+        yyclearin;
+        yyerrok;
+    }
+break;
+case 6:
+#line 32 "mycalc.y"
 {
         yyval.double_value = yyvsp[-2].double_value + yyvsp[0].double_value;
     }
 break;
-case 6:
-#line 30 "mycalc.y"
+case 7:
+#line 36 "mycalc.y"
 {
         yyval.double_value = yyvsp[-2].double_value - yyvsp[0].double_value;
     }
 break;
-case 8:
-#line 37 "mycalc.y"
+case 9:
+#line 43 "mycalc.y"
 {
         yyval.double_value = yyvsp[-2].double_value * yyvsp[0].double_value;
     }
 break;
-case 9:
-#line 41 "mycalc.y"
+case 10:
+#line 47 "mycalc.y"
 {
         yyval.double_value = yyvsp[-2].double_value / yyvsp[0].double_value;
     }
 break;
-#line 367 "y.tab.c"
+#line 379 "y.tab.c"
     }
     yyssp -= yym;
     yystate = *yyssp;
