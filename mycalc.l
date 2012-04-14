@@ -18,7 +18,7 @@ yywrap(void)
     double temp;
     sscanf(yytext, "%lf", &temp);
     yylval.double_value = temp;
-    return DOUBLE_LITERAL
+    return DOUBLE_LITERAL;
 }
 [ \t] ;
 . {
